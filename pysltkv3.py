@@ -8,14 +8,14 @@ class App(tk.Tk):
 
     # create the self window
     self.title('StreamlinkTk')
-    self.geometry('330x500')
+    self.geometry('330x550')
     self.resizable(True, True)
     self.config(bg="#222222")
     
     if os.name == "nt":
         self.option_add('*Font', 'Arial 12')
     else:
-        self.option_add('*Font', 'Arial 20')
+        self.option_add('*Font', 'Arial 17')
 
     self.frame = Frame(self)
     self.frame.pack()
@@ -24,7 +24,7 @@ class App(tk.Tk):
     self.listbox = tk.Listbox(self.frame, height=16, width=30, selectmode='single')
     self.listbox.config(bg='#222222', fg="#EEEEEE")
     self.listbox.pack(pady=10, side= LEFT)
-    self.listbox.bind('<<ListboxSelect>>',lambda event: items_selected())
+    self.listbox.bind('<<ListboxSelect>>',lambda event:items_selected(event))
 
     # link a scrollbar to a list
     self.scrollbar = ttk.Scrollbar(self.frame, orient='vertical')
