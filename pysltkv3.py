@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import BOTH, BOTTOM, LEFT, RIGHT, Y, Frame, ttk
 import os
-from turtle import bgcolor, width
 
 class App(tk.Tk):
   def __init__(self):
@@ -25,10 +24,10 @@ class App(tk.Tk):
     self.listbox = tk.Listbox(self.frame, height=16, width=30, selectmode='single')
     self.listbox.config(bg='#222222', fg="#EEEEEE")
     self.listbox.pack(pady=10, side= LEFT)
+    self.listbox.bind('<<ListboxSelect>>',lambda event: items_selected())
 
     # link a scrollbar to a list
     self.scrollbar = ttk.Scrollbar(self.frame, orient='vertical')
-    # self.scrollbar.config(bg='#222222')
     self.scrollbar.pack(side=RIGHT, fill= Y)
     self.listbox.configure(yscrollcommand=self.scrollbar.set)
     self.scrollbar.config(command=self.listbox.yview)
@@ -42,16 +41,14 @@ class App(tk.Tk):
     # button def
     self.buttonCommit=tk.Button(self, text="Commit", command=lambda:retrieve_input())
     self.buttonCommit.pack(padx=10, side= LEFT)
-     
-    def loadFile():
-        # open links
-        filetxt = open('links.txt', 'r')
-        liste =  filetxt.readlines()
-        filetxt.close()
-        return liste
+    
+    # load links
+    filetxt = open('links.txt', 'r')
+    liste =  filetxt.readlines()
+    filetxt.close()
 
     # populate listbox
-    for item in loadFile():
+    for item in liste:
             itemr = item.replace("\n", "")
             self.listbox.insert(tk.END, itemr)
             
@@ -80,8 +77,6 @@ class App(tk.Tk):
         command = "streamlink " + link + " best"
         print(command)
         res = os.system(command)
-
-    self.listbox.bind('<<ListboxSelect>>', items_selected)
 
 
 if __name__ == "__main__":
