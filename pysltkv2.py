@@ -4,7 +4,7 @@ import os
 
 # create the root window
 root = tk.Tk()
-root.geometry('280x400')
+root.geometry('300x500')
 root.resizable(True, True)
 root.title('StreamlinkTk')
 root.option_add('*Font', 'Arial 16')
