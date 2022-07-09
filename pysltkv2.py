@@ -7,7 +7,7 @@ root = tk.Tk()
 root.geometry('280x400')
 root.resizable(True, True)
 root.title('StreamlinkTk')
-root.option_add('*Font', '32')
+root.option_add('*Font', 'Arial 16')
 
 frame = Frame(root)
 frame.pack()
