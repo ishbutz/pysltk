@@ -1,3 +1,4 @@
+from dataclasses import replace
 import tkinter as tk
 from tkinter import BOTH, BOTTOM, LEFT, RIGHT, Y, Frame, ttk
 import os
@@ -70,18 +71,21 @@ def retrieve_input():
         f.write(inputValue)
         f.close()
 
-
+# paste when R-click
 def Paste():
           textBox.event_generate('<<Paste>>')
           retrieve_input()
 
 # click link
 def items_selected(event):
-    linkz = listbox.get(listbox.curselection())
-    link = linkz.replace("\n", "")
+    indexLb = event.widget.curselection()
+    link = event.widget.get(indexLb).replace("\n", "")
+    commandsl(link)
+
+# Send link to streamlink
+def commandsl(link):    
     command = "streamlink " + link + " best"
     print(command)
-    
     res = os.system(command)
 
 listbox.bind('<<ListboxSelect>>', items_selected)
