@@ -2,12 +2,18 @@ import tkinter as tk
 from tkinter import BOTH, BOTTOM, LEFT, RIGHT, Y, Frame, ttk
 import os
 
+print(os.name)
+
 # create the root window
 root = tk.Tk()
-root.geometry('300x500')
+root.geometry('330x500')
 root.resizable(True, True)
 root.title('StreamlinkTk')
-root.option_add('*Font', 'Arial 16')
+if os.name == "nt":
+    root.option_add('*Font', 'Arial 12')
+else:
+    root.option_add('*Font', 'Arial 20')
+
 
 frame = Frame(root)
 frame.pack()
